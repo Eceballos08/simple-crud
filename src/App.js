@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -11,49 +10,73 @@ import {
   ModalFooter,
 } from "reactstrap";
 import CharacterTable from "./CharacterTable";
-
-const data = [
-  { id: 1, nombre: "Iron Man", poder: "Inteligencia", estado: "Muerto" },
-  { id: 2, nombre: "Thor", poder: "Dios del trueno", estado: "Vivo" },
-  {
-    id: 3,
-    nombre: "Black Widow",
-    poder: "Destreza física",
-    estado: "Muerta",
-  },
-  { id: 4, nombre: "Capitan America", poder: "Fuerza", estado: "Muerto" },
-  { id: 5, personaje: "Hulk", poder: "Fuerza", estado: "Vivo" },
-  {
-    id: 6,
-    nombre: "Capitana Marvel",
-    poder: "Fuerza sobrehumana",
-    estado: "Viva",
-  },
-  { id: 7, nombre: "Spiderman", poder: "Sentido arácnido", estado: "Vivo" },
-  { id: 8, personaje: "Doctor Strange", poder: "Magia", estado: "Vivo" },
-  { id: 8, nombre: "Bruja Escarlata", poder: "Telequinisis", estado: "N/A" },
-];
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
+  const characterData = [
+    {
+      id: uuidv4(),
+      nombre: "Iron Man",
+      poder: "Inteligencia",
+      estado: "Muerto",
+    },
+    { id: uuidv4(), nombre: "Thor", poder: "Dios del trueno", estado: "Vivo" },
+    {
+      id: uuidv4(),
+      nombre: "Black Widow",
+      poder: "Destreza física",
+      estado: "Muerta",
+    },
+    {
+      id: uuidv4(),
+      nombre: "Capitan America",
+      poder: "Fuerza",
+      estado: "Muerto",
+    },
+    { id: uuidv4(), nombre: "Hulk", poder: "Fuerza", estado: "Vivo" },
+    {
+      id: uuidv4(),
+      nombre: "Capitana Marvel",
+      poder: "Fuerza sobrehumana",
+      estado: "Viva",
+    },
+    {
+      id: uuidv4(),
+      nombre: "Spiderman",
+      poder: "Sentido arácnido",
+      estado: "Vivo",
+    },
+    {
+      id: uuidv4(),
+      nombre: "Doctor Strange",
+      poder: "Magia",
+      estado: "Vivo",
+    },
+    {
+      id: uuidv4(),
+      nombre: "Bruja Escarlata",
+      poder: "Telequinisis",
+      estado: "N/A",
+    },
+  ];
+  //creamos un hook de estado para manejar el array con los datos
+  const [character, setCharacter] = useState(characterData);
+
+  //agregar nuevo personaje
+  const addCharacter = (newCharacter) => {
+    newCharacter.id = uuidv4();
+    setCharacter([...character, newCharacter]);
+  };
   return (
     <>
       <Container>
         <br />
-        <Button color="primary">Insertar nuevo personaje </Button>
+        <Button color="primary">Inserta nuevo personaje </Button>
         <br />
         <br />
 
-        <Table>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Personaje</th>
-              <th>Poder</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <CharacterTable />
-        </Table>
+        <CharacterTable character={character} />
       </Container>
     </>
   );
