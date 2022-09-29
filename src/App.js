@@ -1,17 +1,10 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Table,
-  Button,
-  Container,
-  Modal,
-  ModalHeader,
-  FormGroup,
-  ModalFooter,
-} from "reactstrap";
-import CharacterTable from "./CharacterTable";
+import { Container } from "reactstrap";
+import CharacterTable from "./components/table/CharacterTable";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import AddNewCharacter from "./AddNewCharacter";
 
 function App() {
   const characterData = [
@@ -60,19 +53,20 @@ function App() {
       estado: "N/A",
     },
   ];
-  //creamos un hook de estado para manejar el array con los datos
+  //we create a state hook to controll the array with the data
   const [character, setCharacter] = useState(characterData);
 
-  //agregar nuevo personaje
+  //add new character
   const addCharacter = (newCharacter) => {
     newCharacter.id = uuidv4();
     setCharacter([...character, newCharacter]);
   };
+
   return (
     <>
       <Container>
         <br />
-        <Button color="primary">Inserta nuevo personaje </Button>
+
         <br />
         <br />
 

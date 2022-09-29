@@ -1,14 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Table,
-  Button,
-  Container,
-  Modal,
-  ModalHeader,
-  FormGroup,
-  ModalFooter,
-} from "reactstrap";
+import { Table, Button } from "reactstrap";
 
 const CharacterTable = (props) => {
   return (
