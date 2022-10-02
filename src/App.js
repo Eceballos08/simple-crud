@@ -1,10 +1,7 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from "reactstrap";
 import CharacterTable from "./components/table/CharacterTable";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import AddNewCharacter from "./AddNewCharacter";
+import Modal from "./components/modals/Modal";
 
 function App() {
   const characterData = [
@@ -64,14 +61,14 @@ function App() {
 
   return (
     <>
-      <Container>
+      <div>
         <br />
-
+        <Modal />
         <br />
         <br />
 
         <CharacterTable character={character} />
-      </Container>
+      </div>
     </>
   );
 }
