@@ -1,19 +1,50 @@
 import React, { useState } from "react";
 import Modal from "../modal/Modal";
+import "./AddCharacter.css";
 
-const AddCharacter = () => {
+const AddCharacter = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [newItem, setNewItem] = useState("");
+
+  const onCancel = () => {};
+  const onChange = (event) => {
+    setNewItem(event.target.value);
+  };
+
+  const onSubmit = () => {
+    console.log("envía algo");
+  };
+
+  const createCharacter = () => {};
+
+  const updateCharacter = () => {};
+  const deleteCharacter = () => {};
 
   return (
     <div>
       <h3>Agrega un nuevo héroe</h3>
       <button onClick={() => setIsOpen(true)}>Modal</button>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <h2>Ventana modal</h2>
-        <p>Ventana modal reutilizable</p>
+        <form onSubmit={onSubmit}>
+          <label>Personaje</label>
+          <input onChange={onChange} type="text" name="name" />
+          <label>Poder</label>
+          <input onChange={onChange} type="text" name="power" />
+          <label>Estado</label>
+          <input onChange={onChange} type="text" name="state" />
+        </form>
+
         <div className="buttons-container">
-          <button>Cerrar</button>
-          <button>Enviar</button>
+          <button
+            className="modal-button close"
+            type="button"
+            onClick={onCancel}
+          >
+            Cerrar
+          </button>
+          <button className="modal-button submit" type="submit">
+            Enviar
+          </button>
         </div>
       </Modal>
     </div>

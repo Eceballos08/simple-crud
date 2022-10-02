@@ -53,21 +53,39 @@ function App() {
   //we create a state hook to controll the array with the data
   const [character, setCharacter] = useState(characterData);
 
-  //add new character
-  // const addCharacter = (newCharacter) => {
-  //   newCharacter.id = uuidv4();
-  //   setCharacter([...character, newCharacter]);
-  // };
+  const [modalUpdate, setModalUpdate] = useState(false);
+
+  const [characterSelected, setCharacterSelected] = useState({
+    id: "",
+    nombre: "",
+    poder: "",
+    estado: "",
+  });
+
+  const selectCharacter = (element, option) => {
+    setCharacterSelected(element);
+    option === "Editar" && setModalUpdate(true);
+  };
+  const updateCharacter = () => {};
+  const deleteCharacter = () => {};
+
+  const createCharacter = (newCharacter) => {
+    newCharacter.id = uuidv4();
+    setCharacter([...character, newCharacter]);
+  };
 
   return (
     <>
       <div>
         <br />
-        <AddCharacter />
+        <AddCharacter createCharacter={createCharacter} />
         <br />
         <br />
 
-        <CharacterTable character={character} />
+        <CharacterTable
+          character={character}
+          deleteCharacter={deleteCharacter}
+        />
       </div>
     </>
   );

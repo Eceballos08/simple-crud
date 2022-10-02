@@ -1,0 +1,11 @@
+table {
+  width: 95%;
+  /*drop the margin border of the table*/
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #777;
+  padding: 8px 0px 8px 12px;
+}
