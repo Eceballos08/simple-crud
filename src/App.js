@@ -1,7 +1,7 @@
 import CharacterTable from "./components/table/CharacterTable";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Modal from "./components/modals/Modal";
+import AddCharacter from "./components/addCharacter/AddCharacter";
 
 function App() {
   const characterData = [
@@ -54,16 +54,16 @@ function App() {
   const [character, setCharacter] = useState(characterData);
 
   //add new character
-  const addCharacter = (newCharacter) => {
-    newCharacter.id = uuidv4();
-    setCharacter([...character, newCharacter]);
-  };
+  // const addCharacter = (newCharacter) => {
+  //   newCharacter.id = uuidv4();
+  //   setCharacter([...character, newCharacter]);
+  // };
 
   return (
     <>
       <div>
         <br />
-        <Modal />
+        <AddCharacter />
         <br />
         <br />
 
