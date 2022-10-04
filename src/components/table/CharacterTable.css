@@ -1,3 +1,9 @@
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 table {
   width: 95%;
   /*drop the margin border of the table*/
@@ -8,4 +14,20 @@ th,
 td {
   border: 1px solid #777;
   padding: 8px 0px 8px 12px;
+}
+
+.button-table {
+  margin: 5px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-table.update {
+  background-color: #645bff;
+}
+
+.button-table.drop {
+  background-color: red;
 }

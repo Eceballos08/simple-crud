@@ -1,3 +1,11 @@
+.header-container {
+  margin: 0px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 10px 35px;
+}
+
 h2,
 label,
 p {
@@ -37,7 +45,6 @@ form {
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  color: #fff;
 }
 
 .modal-button.close {
@@ -45,5 +52,14 @@ form {
 }
 
 .modal-button.submit {
+  background-color: #645bff;
+}
+
+.add-button {
+  margin: 5px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
   background-color: #645bff;
 }

@@ -5,8 +5,7 @@ import "./CharacterTable.css";
 const CharacterTable = (props) => {
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   return (
-    <>
-      <button>Insertar</button>
+    <div className="table-container">
       <table>
         <thead>
           <tr>
@@ -17,21 +16,28 @@ const CharacterTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.character.length > 0 ? (
-            props.character.map((character) => (
+          {props.characters.length > 0 ? (
+            props.characters.map((character) => (
               <tr key={character.id}>
-                <td>{character.nombre}</td>
-                <td>{character.poder}</td>
-                <td>{character.estado}</td>
+                <td>{character.name}</td>
+                <td>{character.power}</td>
+                <td>{character.state}</td>
                 <td>
                   <button
-                    color="primary"
+                    className="button-table update"
                     onClick={() => setOpenUpdateModal(true)}
                   >
                     Editar
                   </button>
                   {"  "}
-                  <button color="danger">Eliminar</button>
+                  <button
+                    className="button-table drop"
+                    onClick={() => {
+                      props.deleteCharacter(character.id);
+                    }}
+                  >
+                    Eliminar
+                  </button>
                 </td>
               </tr>
             ))
@@ -44,7 +50,7 @@ const CharacterTable = (props) => {
       </table>
 
       <Modal open={openUpdateModal} onClose={() => setOpenUpdateModal(false)} />
-    </>
+    </div>
   );
 };
 
