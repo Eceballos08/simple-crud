@@ -53,20 +53,23 @@ const characterData = [
 
 export const Home = () => {
   //we create a state hook to controll the array with the data
-  const [characters, setCharacter] = useState(characterData);
+  const [characters, setCharacters] = useState(characterData);
 
   const createCharacter = (newCharacter) => {
     newCharacter.id = uuidv4();
-    setCharacter([...characters, newCharacter]);
+    setCharacters([...characters, newCharacter]);
   };
   const updateCharacter = () => {};
 
   const deleteCharacter = (id) => {
-    console.log(id);
-    // const todoIndex = character.findIndex((todo) => todo.id === text);
-    // const newTodos = [...character];
-    // newTodos.splice(todoIndex, 1);
-    // setTodos(newTodos);
+    setCharacters(characters.filter((character) => character.id !== id));
+    // //other way:
+    // const characterIndex = characters.findIndex(
+    //   (character) => character.id === id
+    // );
+    // const newCharacters = [...characters];
+    // newCharacters.splice(characterIndex, 1);
+    // setCharacters(newCharacters);
   };
 
   return (
