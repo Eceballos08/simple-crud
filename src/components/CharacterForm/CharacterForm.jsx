@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../modal/Modal";
 import "./AddCharacter.css";
 
-const AddCharacter = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const CharacterForm = ({
+  createCharacter,
+  updateCharacter,
+  isOpen,
+  characterToUpdate,
+  setIsOpen,
+  setCharacterToUpdate,
+}) => {
   //to have control of each field of the form
   const [name, setName] = useState("");
   const [power, setPower] = useState("");
@@ -12,26 +18,52 @@ const AddCharacter = (props) => {
   //function to close the modal
   const onCancel = () => {
     setIsOpen(false);
+    setCharacterToUpdate(null);
   };
 
   //function to send the new item
   const onSubmit = (e) => {
-    //object to add the new character
+    console.log({ characterToUpdate });
     const character = { name, power, state };
     e.preventDefault(); //prevent the page reload twice
-    props.createCharacter(character);
+    if (characterToUpdate) {
+      character.id = characterToUpdate.id;
+      updateCharacter(character);
+    } else {
+      //object to add the new character
+      createCharacter(character);
+      // event.target.reset(); //clean fields
+    }
     setIsOpen(false); //close modal
-    // event.target.reset(); //clean fields
   };
+
+  useEffect(() => {
+    console.log("actualizamos EFECT", {
+      characterToUpdate,
+      name,
+      state,
+      power,
+    });
+    if (!isOpen) return;
+
+    if (
+      characterToUpdate &&
+      characterToUpdate.name != name &&
+      characterToUpdate.state != state &&
+      characterToUpdate.power != power
+    ) {
+      setName(characterToUpdate.name);
+      setState(characterToUpdate.state);
+      setPower(characterToUpdate.power);
+    } else if (name !== "" && power !== "" && state !== "") {
+      setName("");
+      setState("");
+      setPower("");
+    }
+  }, [isOpen, characterToUpdate]);
 
   return (
     <div>
-      <div className="header-container">
-        <h3>Agrega un nuevo héroe</h3>
-        <button className="add-button" onClick={() => setIsOpen(true)}>
-          Insertar
-        </button>
-      </div>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
         <form>
           <label>Personaje</label>
@@ -72,5 +104,3 @@ const AddCharacter = (props) => {
     </div>
   );
 };
-
-export default AddCharacter;

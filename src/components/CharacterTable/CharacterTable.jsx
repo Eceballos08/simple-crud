@@ -1,9 +1,19 @@
-import React, { useState } from "react";
-import Modal from "../modal/Modal";
+import React from "react";
 import "./CharacterTable.css";
 
-const CharacterTable = (props) => {
-  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+const CharacterTable = ({
+  setIsOpen,
+  setCharacterToUpdate,
+  characters,
+  deleteCharacter,
+}) => {
+  // const { id, name, power, state } = characters;
+  const handleOnEditCharacter = (character) => {
+    console.log("seteamos", { character });
+    setCharacterToUpdate(character);
+    setIsOpen(true);
+  };
+
   return (
     <div className="table-container">
       <table>
@@ -16,8 +26,8 @@ const CharacterTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.characters.length > 0 ? (
-            props.characters.map((character) => (
+          {characters.length > 0 ? (
+            characters.map((character) => (
               <tr key={character.id}>
                 <td>{character.name}</td>
                 <td>{character.power}</td>
@@ -25,7 +35,7 @@ const CharacterTable = (props) => {
                 <td>
                   <button
                     className="button-table update"
-                    onClick={() => setOpenUpdateModal(true)}
+                    onClick={() => handleOnEditCharacter(character)}
                   >
                     Editar
                   </button>
@@ -33,7 +43,7 @@ const CharacterTable = (props) => {
                   <button
                     className="button-table drop"
                     onClick={() => {
-                      props.deleteCharacter(character.id);
+                      deleteCharacter(character.id);
                     }}
                   >
                     Eliminar
@@ -48,8 +58,6 @@ const CharacterTable = (props) => {
           )}
         </tbody>
       </table>
-
-      <Modal open={openUpdateModal} onClose={() => setOpenUpdateModal(false)} />
     </div>
   );
 };

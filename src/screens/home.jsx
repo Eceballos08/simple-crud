@@ -1,8 +1,9 @@
 import React from "react";
-import CharacterTable from "../components/table/CharacterTable";
-import AddCharacter from "../components/addCharacter/AddCharacter";
-import { useDebugValue, useState } from "react";
+import CharacterTable from "../components/CharacterTable/CharacterTable";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import CreateCharacterButton from "../components/CreateCharacterButton/CreateCharacterButton";
+import { CharacterForm } from "../components/CharacterForm/CharacterForm";
 
 const characterData = [
   {
@@ -54,14 +55,17 @@ const characterData = [
 export const Home = () => {
   //we create a state hook to controll the array with the data
   const [characters, setCharacters] = useState(characterData);
+  const [characterToUpdate, setCharacterToUpdate] = useState(null);
+  const [isOpen, setIsOpen] = useState(false); //to control modal
 
   const createCharacter = (newCharacter) => {
     newCharacter.id = uuidv4();
     setCharacters([...characters, newCharacter]);
   };
-  const updateCharacter = () => {};
 
   const deleteCharacter = (id) => {
+    //we do a filter were the function "filter" have a parameter and go through all characters and ask if the item.id is diferent to the item which we selected
+    //returns an array
     setCharacters(characters.filter((character) => character.id !== id));
     // //other way:
     // const characterIndex = characters.findIndex(
@@ -72,17 +76,33 @@ export const Home = () => {
     // setCharacters(newCharacters);
   };
 
+  const updateCharacter = (updatedCharacter) => {
+    const newCharacter = characters.map((character) =>
+      character.id === updatedCharacter.id ? updatedCharacter : character
+    );
+    characterToUpdate(null);
+    setCharacters(newCharacter);
+  };
+
   return (
     <>
       <div>
         <br />
-        <AddCharacter createCharacter={createCharacter} />
-        <br />
-        <br />
-
+        <CharacterForm
+          createCharacter={createCharacter}
+          updateCharacter={updateCharacter}
+          isOpen={isOpen}
+          characterToUpdate={characterToUpdate}
+          setIsOpen={setIsOpen}
+          setCharacterToUpdate={setCharacterToUpdate}
+        />
+        <CreateCharacterButton setIsOpen={setIsOpen} />
         <CharacterTable
           characters={characters}
+          updateCharacter={updateCharacter}
           deleteCharacter={deleteCharacter}
+          setIsOpen={setIsOpen}
+          setCharacterToUpdate={setCharacterToUpdate}
         />
       </div>
     </>
